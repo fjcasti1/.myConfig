@@ -11,7 +11,7 @@ Plugin 'VundleVim/Vundle.vim'
 " My Plugins "
 Plugin 'powerline/powerline'
 Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'python-mode/python-mode'
+Plugin 'python-mode/python-mode'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 Plugin 'scrooloose/nerdtree'
@@ -62,8 +62,8 @@ map <Leader><Right> <c-w><Right><CR>
 noremap <Leader>q :q<CR>
 noremap <Leader>w :w<CR>
 
-" Map sort function to a key "
-vnoremap <Leader>s :sort<CR>
+" Map sort function to a key, removes duplicates "
+vnoremap <Leader>s :sort u<CR>
 
 " Easier moving of code blocks, aka it won't lose its selection "
 vnoremap < <gv
@@ -89,10 +89,10 @@ set tw=79  " width of document (used by gd) "
 set nowrap " don't automatically wrap on load "
 set fo-=t  " don't automatically wrap text when typing "
 set colorcolumn=79
-"" Don't write your code longer than 80 characters, first line warning "
-"if exists('+colorcolumn')
-"  execute "set colorcolumn=72," . join(range(80,300),",")
-"endif
+""" Don't write your code longer than 80 characters, first line warning "
+""if exists('+colorcolumn')
+""  execute"set colorcolumn=72," . join(range(80,300),",")
+""endif
 highlight ColorColumn ctermbg=233
 
 " Easier formatting of paragraphs "
@@ -153,12 +153,16 @@ set wildignore+=*/coverage/*
 "let g:pymode_syntax=1
 "let g:pymode_syntax_builtin_objs=0
 "let g:pymode_syntax_builtin_funcs=0
-"map <Leader>k Oimport ipdb; ipdb.set_trace() # CHECKPOINT<C-c>
-
-"set completeopt=longest,menuone
-"function! OmniPopup(action)
-"    if pumvisible()
-"        if a:action=='j'
+map <Leader>k :call Testing(line("."))<CR>
+function! Testing(line)
+    normal! oipdb.set_trace()  # CHECKPOINT
+    normal ==
+    normal 1Goimport ipdb
+    normal }ge
+    normal V1G s
+    execute "normal! ". a:line. "G" 
+    normal j
+endfunction
 
 " Python Folding
 set nofoldenable
@@ -166,14 +170,12 @@ nnoremap fo zo
 nnoremap fO zR
 nnoremap ff zc
 nnoremap fF zM
-highlight Folded guibg=grey guifg=blue
-highlight FoldColumn guibg=darkgrey guifg=white
+"highlight Folded guibg=grey guifg=blue
+"highlight FoldColumn guibg=darkgrey guifg=white
 set smartindent           " Indents instead of tabs
-"set foldmethod=indent
-"set foldlevel=99
 
 "" SuperTab "
-au FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType python3 setlocal omnifunc=python3complete#Complete
 let g:SuperTabDefaultCompletionType="context"
 set completeopt=menuone,longest,preview
 
@@ -191,3 +193,5 @@ let NERDTreeQuitOnOpen=3
 let NERDTreeNaturalSort=1
 let NERDTreeCustomOpenArgs={'file':{'where':'t'}, 'dir':{'where':'t'}}
 
+" Searching faster
+map s :%s/
