@@ -1,9 +1,9 @@
-from datetime import datetime
-from os.path import isfile, join
-from watchdog.events import FileSystemEventHandler
-from watchdog.observers import Observer
-import os
 import time
+import os
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+from os.path import isfile, join
+from datetime import datetime
 
 
 folder_to_track = "/home/kiko/Downloads"
