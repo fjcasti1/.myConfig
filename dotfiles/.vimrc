@@ -78,7 +78,10 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 
 " Colorscheme "
 set t_Co=256
-color lichen
+"if !empty(glob("~/.vim/bundle/lichen/solarized.vim"))
+"  colorscheme solarized
+"endif
+silent! color lichen
 
 " Syntax Highlight "
 filetype on
