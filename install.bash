@@ -5,4 +5,4 @@
 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 cp ~/.myconfig/dotfiles/.vimrc ~/
-
+vim ~/.myconfig/installingVim.txt -c 'PluginInstall!' -c 'qa!'
