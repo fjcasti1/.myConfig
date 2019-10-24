@@ -64,6 +64,7 @@ noremap <Leader>w :w<CR>
 
 " Map sort function to a key, removes duplicates "
 vnoremap <Leader>s :sort u<CR>
+vnoremap <Leader>S :sort! u<CR>
 
 " Easier moving of code blocks, aka it won't lose its selection "
 vnoremap < <gv
@@ -153,14 +154,14 @@ set wildignore+=*/coverage/*
 "let g:pymode_syntax=1
 "let g:pymode_syntax_builtin_objs=0
 "let g:pymode_syntax_builtin_funcs=0
-map <Leader>k :call Testing(line("."))<CR>
-function! Testing(line)
+map <Leader>k :call CheckPoint(line("."))<CR>
+function! CheckPoint(line)
     normal! oipdb.set_trace()  # CHECKPOINT
     normal ==
     normal 1Goimport ipdb
     normal }ge
-    normal V1G s
-    execute "normal! ". a:line. "G" 
+    normal V1G S
+    execute "normal! ". a:line. "G"
     normal j
 endfunction
 
