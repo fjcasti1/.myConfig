@@ -141,7 +141,7 @@ set laststatus=2
 " Settings for ctrlP "
 map <Leader>o <C-p>
 let g:ctrlp_max_height = 20
-let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_working_path_mode = 'aw'
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
