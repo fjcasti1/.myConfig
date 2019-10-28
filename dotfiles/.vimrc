@@ -1,4 +1,9 @@
 " ====================================================== "
+" AUTHOR: Francisco Castillo
+" SOURCE: https://github.com/fjcasti1/.myconfig/dotfiles
+" ====================================================== "
+
+" ====================================================== "
 " Use Vundle
 " ====================================================== "
 set nocompatible              " be iMproved, required
@@ -21,8 +26,9 @@ Plugin 'fjcasti1/lichen'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " ====================================================== "
-" Use Vundle
+" End Vundle
 " ====================================================== "
+
 
 " Performance Options "
 set autoindent " New lines inherit the indentation of previous lines.
@@ -67,6 +73,9 @@ noremap <Leader>w :w<CR>
 vnoremap <Leader>s :sort u<CR>
 vnoremap <Leader>S :sort! u<CR>
 
+" Time in ms that is waited for a key code or mapped key seq to complete "
+set timeoutlen=500
+
 " Easier moving of code blocks, aka it won't lose its selection "
 vnoremap < <gv
 vnoremap > >gv
@@ -78,9 +87,6 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 
 " Colorscheme "
 set t_Co=256
-"if !empty(glob("~/.vim/bundle/lichen/solarized.vim"))
-"  colorscheme solarized
-"endif
 silent! color lichen
 
 " Syntax Highlight "
@@ -88,16 +94,13 @@ filetype on
 filetype plugin indent on
 syntax on
 
-"" Showing line numbers and length "
+"" Showing line numbers ,length and format options"
 set number " Number lines "
-set tw=79  " width of document (used by gd) "
+set textwidth=79  " width of document (used by gd) "
 set nowrap " don't automatically wrap on load "
 set fo-=t  " don't automatically wrap text when typing "
 set colorcolumn=79
-""" Don't write your code longer than 80 characters, first line warning "
-""if exists('+colorcolumn')
-""  execute"set colorcolumn=72," . join(range(80,300),",")
-""endif
+set formatoptions=c,q,r,t
 highlight ColorColumn ctermbg=233
 
 " Easier formatting of paragraphs "
@@ -114,15 +117,13 @@ set softtabstop=4
 set shiftwidth=4
 set shiftround
 set expandtab
+set smartindent " Indents instead of tabs
 
 " Make search case insensitive "
 set hlsearch
 set ignorecase
 set incsearch
 set smartcase
-
-" Shows info on current command in status line "
-set showcmd
 
 " Allows for more robust behavior of <%> matching.
 " " NOTE -- runtime vs. source -- runtime is relative to vim directory;
@@ -133,6 +134,91 @@ runtime macros/matchit.vim
 set wildmenu
 set wildmode=list:longest " Shows all of the options in wild menu.
 
+" Shows info on current command in status line "
+set showcmd
+
+" Minimal number of screen lines to keep above and below the cursor "
+set scrolloff=10
+
+" A buffer becomes hidden when it is abandoned "
+set hidden
+
+" Sets central temp file location, to prevent local default behavior.
+if isdirectory($HOME . '/.vim/.tmp') == 0
+  :silent !mkdir -m 700  -p ~/.vim/.tmp > /dev/null 2>&1
+endif
+
+set backupdir=~/.vim/.tmp ",~/.local/tmp/vim,/var/tmp,/tmp,
+set directory=~/.vim/.tmp ",~/.local/tmp/vim,/var/tmp,/tmp,
+
+if exists("+viminfo")
+  " viminfo -- Saves Vim state information such as marks, command line
+  "            history, search string history, buffers, global vars, 
+  "            registers, search/sub patterns, and input-line history.
+  "            :help viminfo
+  "            Allegedly default permissions are sufficient for privacy.
+  "
+  if isdirectory( $HOME . '/.vim/.state') == 0
+    :silent !mkdir -m 700 -p ~/.vim/.state > /dev/null 2>&1
+  endif
+  set viminfo+=n~/.vim/.state/viminfo
+  set spellfile =$HOME/.vim/.state/spell/en.utf-8.add
+  set spellfile+=$HOME/.vim/.state/spell/en.latin1.add
+  set spellfile+=$HOME/.vim/.state/spell/en.ascii.add
+  set spelllang=en_us
+endif
+
+if exists("+undofile")
+  " undofile -- This allows you to use undos after exiting and 
+  "             restarting. NOTE: only present in 7.3+
+  "             :help undo-persistence
+  if isdirectory( $HOME . '/.vim/.undo' ) == 0
+    :silent !mkdir -m 700 -p ~/.vim/.undo > /dev/null 2>&1
+  endif
+  set undodir=~/.vim/.undo
+  set undofile
+endif
+
+" For code folding: saves code folding for next session
+"   Also saves the view, and thus the place of the cursor.
+"   ISSUE : doesn't necessarily update with the .vimrc, requires
+"           cleaning.
+if isdirectory( $HOME . '/.vim/.state/view') == 0
+  :silent !mkdir -m 700 -p ~/.vim/.state/view > /dev/null 2>&1
+endif
+set viewdir=~/.vim/.state/view
+autocmd BufWrite * mkview
+autocmd BufRead  * silent loadview
+
+"" Group Closing-MultiLine
+inoremap (<cr>  ()<Left><CR><CR><C-D><Up><tab>
+inoremap {<cr>  {}<Left><CR><CR><C-D><Up><tab>
+inoremap [<cr>  []<Left><CR><CR><C-D><Up><tab>
+inoremap (      ()<Left>
+inoremap {      {}<Left>
+inoremap [      []<Left>
+inoremap ()     ()<Left>
+inoremap {}     {}<Left>
+inoremap []     []<Left>
+" Group Closing-One Line (plus back up for {})
+inoremap (<space> (  )<Left><Left>
+inoremap {<space> {  }<Left><Left>
+inoremap [<space> [  ]<Left><Left>
+
+" When a bracket is inserted, briefly jump to the matching one "
+set showmatch
+set matchtime=5
+
+" Adds custom general highlighting to comment keywords
+function! HighlightKeywords()
+  let v=&ft."Comment"
+  exe 'syn keyword myTodo containedin='. v '
+     \ TODO XXX BUG NOTE FIXME ADD ISSUE QUEST QUESTION ASK FIX 
+     \ GARBAGE TRASH BAD OKAY CITE REF DISCUSS DISC TALK MORE 
+     \ LESS CLEAN MARK HERE CHECK CITE EQUATION'
+  hi def link myTodo Todo
+endfunction
+autocmd Syntax * call HighlightKeywords()
 
 " ===================================================================== "
 " Python IDE Setup "
@@ -177,7 +263,6 @@ nnoremap ff zc
 nnoremap fF zM
 "highlight Folded guibg=grey guifg=blue
 "highlight FoldColumn guibg=darkgrey guifg=white
-set smartindent           " Indents instead of tabs
 
 "" SuperTab "
 autocmd FileType python3 setlocal omnifunc=python3complete#Complete
