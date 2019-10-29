@@ -17,8 +17,8 @@ class MyHandler(FileSystemEventHandler):
         for filename in files:
             i = 1
             try:
-                extension = str(os.path.splitext(folder_to_track + '/' +
-                                                 filename)[-1])
+                extension = str(os.path.splitext(folder_to_track +
+                                                 '/' + filename)[-1])
             except Exception:
                 extension = 'noname'
 
