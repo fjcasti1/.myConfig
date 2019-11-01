@@ -22,7 +22,8 @@ Plugin 'ervandew/supertab'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'fjcasti1/lichen'
-Plugin 'xuhdev/vim-latex-live-preview'
+Plugin 'lervag/vimtex'
+"Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'jreybert/vimagit'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -31,6 +32,8 @@ filetype plugin indent on    " required
 " End Vundle
 " ====================================================== "
 
+" Avoid <Esc> key "
+imap qq <Esc>
 
 " Performance Options "
 set autoindent " New lines inherit the indentation of previous lines.
@@ -296,46 +299,75 @@ autocmd User VimagitEnterCommit startinsert
 autocmd User VimagitEnterCommit setlocal textwidth=72
 autocmd User VimagitLeaveCommit setlocal textwidth=0
 
-"""LATEX
+""LATEX
 
-autocmd FileType tex let localmapleader =','
+"autocmd FileType tex let localmapleader = <lt> 
 " Word count:
-autocmd FileType tex map <leader>w :w !detex \| wc -w<CR>
+"autocmd FileType tex map <leader>w :w !detex \| wc -w<CR>
 " Code snippets
-autocmd FileType tex inoremap <localleader>fr \begin{frame}<Enter>\frametitle{}<Enter><Enter><++><Enter><Enter>\end{frame}<Enter><Enter><++><Esc>6kf}i
-autocmd FileType tex inoremap <localleader>fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
-autocmd FileType tex inoremap <localleader>exe \begin{exe}<Enter>\ex<Space><Enter>\end{exe}<Enter><Enter><++><Esc>3kA
-autocmd FileType tex inoremap <localleader>em \emph{}<++><Esc>T{i
-autocmd FileType tex inoremap <localleader>bf \textbf{}<++><Esc>T{i
-autocmd FileType tex vnoremap <localleader> <ESC>`<i\{<ESC>`>2la}<ESC>?\\{<Enter>a
-autocmd FileType tex inoremap <localleader>it \textit{}<++><Esc>T{i
-autocmd FileType tex inoremap <localleader>ct \textcite{}<++><Esc>T{i
-autocmd FileType tex inoremap <localleader>cp \parencite{}<++><Esc>T{i
-autocmd FileType tex inoremap <localleader>glos {\gll<Space><++><Space>\\<Enter><++><Space>\\<Enter>\trans{``<++>''}}<Esc>2k2bcw
-autocmd FileType tex inoremap <localleader>x \begin{xlist}<Enter>\ex<Space><Enter>\end{xlist}<Esc>kA<Space>
-autocmd FileType tex inoremap <localleader>ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
-autocmd FileType tex inoremap <localleader>ul \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
-autocmd FileType tex inoremap <localleader>li <Enter>\item<Space>
-autocmd FileType tex inoremap <localleader>ref \ref{}<Space><++><Esc>T{i
-autocmd FileType tex inoremap <localleader>tab \begin{tabular}<Enter><++><Enter>\end{tabular}<Enter><Enter><++><Esc>4kA{}<Esc>i
-autocmd FileType tex inoremap <localleader>ot \begin{tableau}<Enter>\inp{<++>}<Tab>\const{<++>}<Tab><++><Enter><++><Enter>\end{tableau}<Enter><Enter><++><Esc>5kA{}<Esc>i
-autocmd FileType tex inoremap <localleader>can \cand{}<Tab><++><Esc>T{i
-autocmd FileType tex inoremap <localleader>con \const{}<Tab><++><Esc>T{i
-autocmd FileType tex inoremap <localleader>v \vio{}<Tab><++><Esc>T{i
-autocmd FileType tex inoremap <localleader>a \href{}{<++>}<Space><++><Esc>2T{i
-autocmd FileType tex inoremap <localleader>sc \textsc{}<Space><++><Esc>T{i
-autocmd FileType tex inoremap <localleader>chap \chapter{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap <localleader>sec \section{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap <localleader>ssec \subsection{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap <localleader>sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap <localleader>st <Esc>F{i*<Esc>f}i
-autocmd FileType tex inoremap <localleader>beg \begin{DELRN}<Enter><++><Enter>\end{DELRN}<Enter><Enter><++><Esc>4k0fR:MultipleCursorsFind<Space>DELRN<Enter>c
-autocmd FileType tex inoremap <localleader>up <Esc>/usepackage<Enter>o\usepackage{}<Esc>i
-autocmd FileType tex nnoremap <localleader>up /usepackage<Enter>o\usepackage{}<Esc>i
-autocmd FileType tex inoremap <localleader>tt \texttt{}<Space><++><Esc>T{i
-autocmd FileType tex inoremap <localleader>bt {\blindtext}
-autocmd FileType tex inoremap <localleader>nu $\varnothing$
-autocmd FileType tex inoremap <localleader>col \begin{columns}[T]<Enter>\begin{column}{.5\textwidth}<Enter><Enter>\end{column}<Enter>\begin{column}{.5\textwidth}<Enter><++><Enter>\end{column}<Enter>\end{columns}<Esc>5kA
-autocmd FileType tex inoremap <localleader>rn (\ref{})<++><Esc>F}i
+" Text writing
+autocmd FileType tex inoremap <Space><Space> <Esc>/<++><CR>c4l
+autocmd FileType tex inoremap sec<Space> \section{}<CR><CR><++><Esc><Up><Up>$i
+autocmd FileType tex inoremap ssec<Space> \subsection{}<CR><CR><++><Esc><Up><Up>$i
+autocmd FileType tex inoremap sssec<Space> \subsubsection{}<CR><CR><++><Esc><Up><Up>$i
+autocmd FileType tex inoremap ben<Space> \begin{enumerate}<CR><CR>\end{enumerate}<CR><CR><++><Esc>3kA\item<Space>
+autocmd FileType tex inoremap bit<Space> \begin{itemize}<CR><CR>\end{itemize}<CR><CR><++><Esc>3kA\item<Space>
+autocmd FileType tex inoremap it<Space> <ESC>$o\item<Space>
+autocmd FileType tex inoremap bf<Space> \textbf{} <++><Esc>T{i
+autocmd FileType tex inoremap ita<Space> \textit{} <++><Esc>T{i
+" math writing
+autocmd FileType tex inoremap beq<Space> \begin{equation}<CR><++><CR>\end{equation}<CR><CR><++><Esc>kkk^cw
+autocmd FileType tex inoremap bal<Space> \begin{align}<CR><++><CR>\end{align}<CR><CR><++><Esc>kkk^cw
+autocmd FileType tex inoremap fr<Space> \frac{}{<++>} <++><Esc>bbli
+autocmd FileType tex inoremap pa<Space> \partial
+autocmd FileType tex inoremap om<Space> \omega
+autocmd FileType tex inoremap Om<Space> \Omega
+autocmd FileType tex inoremap al<Space> \alpha
+autocmd FileType tex inoremap Al<Space> \Alpha
+autocmd FileType tex inoremap th<Space> \theta
+autocmd FileType tex inoremap Th<Space> \Theta
+
+autocmd FileType tex noremap <F1> :w<CR>:VimtexCompile<CR>
+autocmd FileType tex inoremap <F1> <Esc>:w<CR>:VimtexCompile<CR>i<Right>
+autocmd FileType tex inoremap <C-w> <Esc>:w<CR>
+
+"autocmd FileType tex inoremap <localleader>fr \begin{frame}<CR>\frametitle{}<CR><CR><++><CR><CR>\end{frame}<CR><CR><++><Esc>6kf}i
+"autocmd FileType tex inoremap <localleader>fi \begin{fitch}<CR><CR>\end{fitch}<CR><CR><++><Esc>3kA
+"autocmd FileType tex inoremap <localleader>exe \begin{exe}<CR>\ex<Space><CR>\end{exe}<CR><CR><++><Esc>3kA
+"autocmd FileType tex inoremap <localleader>em \emph{}<++><Esc>T{i
+"autocmd FileType tex vnoremap <localleader> <ESC>`<i\{<ESC>`>2la}<ESC>?\\{<CR>a
+"autocmd FileType tex inoremap <localleader>ct \textcite{}<++><Esc>T{i
+"autocmd FileType tex inoremap <localleader>cp \parencite{}<++><Esc>T{i
+"autocmd FileType tex inoremap <localleader>glos {\gll<Space><++><Space>\\<CR><++><Space>\\<CR>\trans{``<++>''}}<Esc>2k2bcw
+"autocmd FileType tex inoremap <localleader>x \begin{xlist}<CR>\ex<Space><CR>\end{xlist}<Esc>kA<Space>
+"autocmd FileType tex inoremap <localleader>ref \ref{}<Space><++><Esc>T{i
+"autocmd FileType tex inoremap <localleader>tab \begin{tabular}<CR><++><CR>\end{tabular}<CR><CR><++><Esc>4kA{}<Esc>i
+"autocmd FileType tex inoremap <localleader>ot \begin{tableau}<CR>\inp{<++>}<Tab>\const{<++>}<Tab><++><CR><++><CR>\end{tableau}<CR><CR><++><Esc>5kA{}<Esc>i
+"autocmd FileType tex inoremap <localleader>can \cand{}<Tab><++><Esc>T{i
+"autocmd FileType tex inoremap <localleader>con \const{}<Tab><++><Esc>T{i
+"autocmd FileType tex inoremap <localleader>v \vio{}<Tab><++><Esc>T{i
+"autocmd FileType tex inoremap <localleader>a \href{}{<++>}<Space><++><Esc>2T{i
+"autocmd FileType tex inoremap <localleader>sc \textsc{}<Space><++><Esc>T{i
+"autocmd FileType tex inoremap <localleader>chap \chapter{}<CR><CR><++><Esc>2kf}i
+"autocmd FileType tex inoremap <localleader>sec \section{}<CR><CR><++><Esc>2kf}i
+"autocmd FileType tex inoremap <localleader>ssec \subsection{}<CR><CR><++><Esc>2kf}i
+"autocmd FileType tex inoremap <localleader>sssec \subsubsection{}<CR><CR><++><Esc>2kf}i
+"autocmd FileType tex inoremap <localleader>st <Esc>F{i*<Esc>f}i
+"autocmd FileType tex inoremap <localleader>up <Esc>/usepackage<CR>o\usepackage{}<Esc>i
+"autocmd FileType tex nnoremap <localleader>up /usepackage<CR>o\usepackage{}<Esc>i
+"autocmd FileType tex inoremap <localleader>tt \texttt{}<Space><++><Esc>T{i
+"autocmd FileType tex inoremap <localleader>bt {\blindtext}
+"autocmd FileType tex inoremap <localleader>nu $\varnothing$
+"autocmd FileType tex inoremap <localleader>col \begin{columns}[T]<CR>\begin{column}{.5\textwidth}<CR><CR>\end{column}<CR>\begin{column}{.5\textwidth}<CR><++><CR>\end{column}<CR>\end{columns}<Esc>5kA
+"autocmd FileType tex inoremap <localleader>rn (\ref{})<++><Esc>F}i
 "
 "let g:livepreview_previewer = 'your_viewer'
+
+let g:vimtex_fold_enabled = 1
+autocmd BufEnter *.tex set foldmethod=expr
+autocmd BufEnter *.tex set foldexpr=vimtex#fold#level(v:lnum)
+autocmd BufEnter *.tex set foldtext=vimtex#fold#text()
+"let g:vimtex_quickfix_latexlog = {
+"        \ 'overfull' : 0,
+"        \ 'underfull' : 0,
+"        \}
