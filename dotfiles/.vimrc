@@ -31,6 +31,10 @@ filetype plugin indent on    " required
 " ====================================================== "
 " End Vundle
 " ====================================================== "
+"
+"Automatically deletes all trailing whitespace on save.
+autocmd BufWritePre * %s/\s\+$//e
+
 
 " Avoid <Esc> key "
 imap qq <Esc>
@@ -158,7 +162,7 @@ set directory=~/.vim/.tmp ",~/.local/tmp/vim,/var/tmp,/tmp,
 
 if exists("+viminfo")
   " viminfo -- Saves Vim state information such as marks, command line
-  "            history, search string history, buffers, global vars, 
+  "            history, search string history, buffers, global vars,
   "            registers, search/sub patterns, and input-line history.
   "            :help viminfo
   "            Allegedly default permissions are sufficient for privacy.
@@ -174,7 +178,7 @@ if exists("+viminfo")
 endif
 
 if exists("+undofile")
-  " undofile -- This allows you to use undos after exiting and 
+  " undofile -- This allows you to use undos after exiting and
   "             restarting. NOTE: only present in 7.3+
   "             :help undo-persistence
   if isdirectory( $HOME . '/.vim/.undo' ) == 0
@@ -218,8 +222,8 @@ set matchtime=5
 function! HighlightKeywords()
   let v=&ft."Comment"
   exe 'syn keyword myTodo containedin='. v '
-     \ TODO XXX BUG NOTE FIXME ADD ISSUE QUEST QUESTION ASK FIX 
-     \ GARBAGE TRASH BAD OKAY CITE REF DISCUSS DISC TALK MORE 
+     \ TODO XXX BUG NOTE FIXME ADD ISSUE QUEST QUESTION ASK FIX
+     \ GARBAGE TRASH BAD OKAY CITE REF DISCUSS DISC TALK MORE
      \ LESS CLEAN MARK HERE CHECK CITE EQUATION'
   hi def link myTodo Todo
 endfunction
@@ -301,7 +305,7 @@ autocmd User VimagitLeaveCommit setlocal textwidth=0
 
 ""LATEX
 
-"autocmd FileType tex let localmapleader = <lt> 
+"autocmd FileType tex let localmapleader = <lt>
 " Word count:
 "autocmd FileType tex map <leader>w :w !detex \| wc -w<CR>
 " Code snippets
@@ -367,6 +371,26 @@ let g:vimtex_fold_enabled = 1
 autocmd BufEnter *.tex set foldmethod=expr
 autocmd BufEnter *.tex set foldexpr=vimtex#fold#level(v:lnum)
 autocmd BufEnter *.tex set foldtext=vimtex#fold#text()
+let g:vimtex_quickfix_latexlog = {
+    \ 'default' : 1,
+    \ 'ignore_filters' : [],
+    \ 'general' : 1,
+    \ 'references' : 1,
+    \ 'overfull' : 0,
+    \ 'underfull' : 0,
+    \ 'font' : 1,
+    \ 'packages' : {
+        \   'default' : 1,
+        \   'general' : 1,
+        \   'babel' : 1,
+        \   'biblatex' : 1,
+        \   'fixltx2e' : 1,
+        \   'hyperref' : 1,
+        \   'natbib' : 1,
+        \   'scrreprt' : 1,
+        \   'titlesec' : 1,
+        \ },
+    \}
 "let g:vimtex_quickfix_latexlog = {
 "        \ 'overfull' : 0,
 "        \ 'underfull' : 0,
