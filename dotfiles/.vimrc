@@ -395,3 +395,5 @@ let g:vimtex_quickfix_latexlog = {
 "        \ 'overfull' : 0,
 "        \ 'underfull' : 0,
 "        \}
+
+autocmd BufNewFile *.html 0r ~/.vim/templates/skeleton.html
