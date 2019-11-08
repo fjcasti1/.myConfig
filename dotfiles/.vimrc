@@ -25,6 +25,7 @@ Plugin 'fjcasti1/lichen'
 Plugin 'lervag/vimtex'
 "Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'jreybert/vimagit'
+Plugin 'mattn/emmet-vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -37,7 +38,7 @@ autocmd BufWritePre * %s/\s\+$//e
 
 
 " Avoid <Esc> key "
-imap qq <Esc>
+inoremap qq <Esc>
 
 " Performance Options "
 set autoindent " New lines inherit the indentation of previous lines.
@@ -77,6 +78,7 @@ map <Leader><Right> <c-w><Right><CR>
 " Save & Quit Quick "
 noremap <Leader>q :q<CR>
 noremap <Leader>w :w<CR>
+inoremap ww <Esc>:w<CR>i
 
 " Map sort function to a key, removes duplicates "
 vnoremap <Leader>s :sort u<CR>
@@ -305,31 +307,52 @@ autocmd User VimagitLeaveCommit setlocal textwidth=0
 
 ""LATEX
 
-"autocmd FileType tex let localmapleader = <lt>
+autocmd BufNewFile *.tex 0r ~/.vim/templates/skeleton.tex
+autocmd FileType tex let maplocalleader = '\<tab>'
 " Word count:
 "autocmd FileType tex map <leader>w :w !detex \| wc -w<CR>
 " Code snippets
+autocmd FileType tex inoremap upa<tab> <++><Esc>/usepackage<CR>}geo\usepackage{}<Esc>i
 " Text writing
 autocmd FileType tex inoremap <Space><Space> <Esc>/<++><CR>c4l
-autocmd FileType tex inoremap sec<Space> \section{}<CR><CR><++><Esc><Up><Up>$i
-autocmd FileType tex inoremap ssec<Space> \subsection{}<CR><CR><++><Esc><Up><Up>$i
-autocmd FileType tex inoremap sssec<Space> \subsubsection{}<CR><CR><++><Esc><Up><Up>$i
-autocmd FileType tex inoremap ben<Space> \begin{enumerate}<CR><CR>\end{enumerate}<CR><CR><++><Esc>3kA\item<Space>
-autocmd FileType tex inoremap bit<Space> \begin{itemize}<CR><CR>\end{itemize}<CR><CR><++><Esc>3kA\item<Space>
-autocmd FileType tex inoremap it<Space> <ESC>$o\item<Space>
-autocmd FileType tex inoremap bf<Space> \textbf{} <++><Esc>T{i
-autocmd FileType tex inoremap ita<Space> \textit{} <++><Esc>T{i
+autocmd FileType tex noremap <Space><Space> <Esc>/<++><CR>c4l
+autocmd FileType tex inoremap <tab><tab> <Esc>/<++><CR>c4l
+autocmd FileType tex noremap <tab><tab> <Esc>/<++><CR>c4l
+autocmd FileType tex inoremap sec<tab> \section{}<CR><CR><++><Esc><Up><Up>$i
+autocmd FileType tex inoremap ssec<tab> \subsection{}<CR><CR><++><Esc><Up><Up>$i
+autocmd FileType tex inoremap sssec<tab> \subsubsection{}<CR><CR><++><Esc><Up><Up>$i
+autocmd FileType tex inoremap enm<tab> \begin{enumerate}<CR><CR>\end{enumerate}<CR><CR><++><Esc>3kA\item<Space>
+autocmd FileType tex inoremap itz<tab> \begin{itemize}<CR><CR>\end{itemize}<CR><CR><++><Esc>3kA\item<Space>
+autocmd FileType tex inoremap itm<tab> <ESC>$o\item<Space>
+
+autocmd FileType tex inoremap txt<tab> \text{} <++><Esc>T{i
+autocmd FileType tex inoremap tbf<tab> \textbf{} <++><Esc>T{i
+autocmd FileType tex inoremap tit<tab> \textit{} <++><Esc>T{i
 " math writing
-autocmd FileType tex inoremap beq<Space> \begin{equation}<CR><++><CR>\end{equation}<CR><CR><++><Esc>kkk^cw
-autocmd FileType tex inoremap bal<Space> \begin{align}<CR><++><CR>\end{align}<CR><CR><++><Esc>kkk^cw
-autocmd FileType tex inoremap fr<Space> \frac{}{<++>} <++><Esc>bbli
-autocmd FileType tex inoremap pa<Space> \partial
-autocmd FileType tex inoremap om<Space> \omega
-autocmd FileType tex inoremap Om<Space> \Omega
-autocmd FileType tex inoremap al<Space> \alpha
-autocmd FileType tex inoremap Al<Space> \Alpha
-autocmd FileType tex inoremap th<Space> \theta
-autocmd FileType tex inoremap Th<Space> \Theta
+autocmd FileType tex inoremap <localleader>beq \begin{equation}<CR><++><CR>\end{equation}<CR><CR><++><Esc>kkk^cw
+autocmd FileType tex inoremap eq<tab> \begin{equation}<CR><++><CR>\end{equation}<CR><CR><++><Esc>kkk^cw
+autocmd FileType tex inoremap al<tab> \begin{align}<CR><++><CR>\end{align}<CR><CR><++><Esc>kkk^cw
+autocmd FileType tex inoremap frac<tab> \frac{}{<++>} <++><Esc>bbli
+autocmd FileType tex inoremap pa<tab> \partial
+autocmd FileType tex inoremap Alp<tab> \Alpha
+autocmd FileType tex inoremap Del<tab> \Delta
+autocmd FileType tex inoremap Lam<tab> \Lambda
+autocmd FileType tex inoremap Ome<tab> \Omega
+autocmd FileType tex inoremap The<tab> \Theta
+autocmd FileType tex inoremap alp<tab> \alpha
+autocmd FileType tex inoremap del<tab> \delta
+autocmd FileType tex inoremap lam<tab> \lambda
+autocmd FileType tex inoremap mu<tab> \mu
+autocmd FileType tex inoremap nu<tab> \nu
+autocmd FileType tex inoremap ome<tab> \omega
+autocmd FileType tex inoremap the<tab> \theta
+autocmd FileType tex inoremap nab<tab> \nabla
+autocmd FileType tex inoremap bld<tab> \bold{}<++><Esc>4hi
+autocmd FileType tex inoremap $ $$<Space><++><Esc>5hi
+" Operations
+autocmd FileType tex inoremap sum<tab> \sum_{<++>}^{<++>}<++><Esc>15hc4l
+autocmd FileType tex inoremap bar<tab> \bar{<++>}<++><Esc>8hc4l
+autocmd FileType tex inoremap hat<tab> \hat{<++>}<++><Esc>8hc4l
 
 autocmd FileType tex noremap <F1> :w<CR>:VimtexCompile<CR>
 autocmd FileType tex inoremap <F1> <Esc>:w<CR>:VimtexCompile<CR>i<Right>
@@ -396,4 +419,9 @@ let g:vimtex_quickfix_latexlog = {
 "        \ 'underfull' : 0,
 "        \}
 
+" HTML "
 autocmd BufNewFile *.html 0r ~/.vim/templates/skeleton.html
+let g:user_emmet_leader_key='<Tab>'
+autocmd FileType html inoremap qq <Esc>
+
+
