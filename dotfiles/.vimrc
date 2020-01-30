@@ -289,11 +289,12 @@ let g:jedi#usages_command=""
 let g:jedi#popup_select_first = 1
 
 " NERDTree "
-map <Leader>a :NERDTree<CR>
-map <Leader>' :NERDTreeClose<CR>
+"map <Leader>a :NERDTree<CR>
+"map <Leader>' :NERDTreeClose<CR>
+map <Leader>f :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=3
 let NERDTreeNaturalSort=1
-let NERDTreeCustomOpenArgs={'file':{'where':'t'}, 'dir':{'where':'t'}}
+"let NERDTreeCustomOpenArgs={'file':{'where':'t'}, 'dir':{'where':'t'}}
 
 " Searching faster
 map s :%s/
