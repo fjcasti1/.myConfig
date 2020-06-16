@@ -111,7 +111,7 @@ filetype on
 filetype plugin indent on
 syntax on
 
-"" Showing line numbers ,length and format options"
+" Showing line numbers ,length and format options"
 set number " Number lines "
 set textwidth=79  " width of document (used by gd) "
 set nowrap " don't automatically wrap on load "
@@ -119,6 +119,8 @@ set fo-=t  " don't automatically wrap text when typing "
 set colorcolumn=79
 set formatoptions=c,q,r,t
 highlight ColorColumn ctermbg=233
+" Highlight current line
+set cursorline
 
 " Easier formatting of paragraphs "
 vmap Q gq
@@ -137,11 +139,27 @@ set shiftround
 set expandtab
 set smartindent " Indents instead of tabs
 
-" Make search case insensitive "
+" Highlight searches
 set hlsearch
+" Ignore case of searches
 set ignorecase
+" Highlight dynamically as pattern is typed
 set incsearch
+" Override ignorecase if the search patter contains upper case characters
 set smartcase
+
+" Enable mouse in all modes
+set mouse=a
+" Disable error bells
+set noerrorbells
+" Don’t reset cursor to start of line when moving around.
+set nostartofline
+" Show the cursor position
+set ruler
+" Show the current mode
+set showmode
+" Show the (partial) command as it’s being typed
+set showcmd
 
 " Allows for more robust behavior of <%> matching.
 " " NOTE -- runtime vs. source -- runtime is relative to vim directory;
@@ -151,9 +169,6 @@ runtime macros/matchit.vim
 " Shows list for <tab> complete in : (command) mode
 set wildmenu
 set wildmode=list:longest " Shows all of the options in wild menu.
-
-" Shows info on current command in status line "
-set showcmd
 
 " Minimal number of screen lines to keep above and below the cursor "
 set scrolloff=10
