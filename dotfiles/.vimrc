@@ -243,6 +243,7 @@ set laststatus=2
 map <Leader>o <C-p>
 let g:ctrlp_max_height = 20
 let g:ctrlp_working_path_mode = 'aw'
+let g:ctrlp_show_hidden = 1
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
