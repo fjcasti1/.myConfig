@@ -3,7 +3,7 @@
 # Installs configuration files to User's home directory
 # ----------------------------------------------------------------------
 
-for file in {bashrc,bash_profile,bash_prompt,aliases,functions}; do
+for file in {bashrc,bash_profile,bash_prompt,aliases,functions,inputrc}; do
 	[ -f "~/.$file" ] && rm "~/.$file";
   ln -sfn ~/.myConfig/dotfiles/.$file ~/.$file;
 done;
