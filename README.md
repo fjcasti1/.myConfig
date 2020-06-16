@@ -1,5 +1,6 @@
 # .myConfig
 <<<<<<< HEAD
+test prompt local 2
 
 test prompt local
 =======
