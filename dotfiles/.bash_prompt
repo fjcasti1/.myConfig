@@ -51,6 +51,8 @@ prompt_git() {
 			s+='$';
 		fi;
 	fi;
+  #git rev-list --left-right --count origin/master...master | awk '{print "Behind "$1" - Ahead "$2""}'
+
 
 	[ -n "${s}" ] && s=" [${s}]";
 
