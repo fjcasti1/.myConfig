@@ -1,1 +1,3 @@
 # .myConfig
+
+test prompt local
