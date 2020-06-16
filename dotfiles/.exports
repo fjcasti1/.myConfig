@@ -13,9 +13,9 @@ export NODE_REPL_MODE='sloppy';
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
 
-# Increase Bash history size. Allow 32³ entries; the default is 500.
-export HISTSIZE='32768';
-export HISTFILESIZE="${HISTSIZE}";
+# Increase Bash history size, the default is 500.
+export HISTSIZE='50000';
+export HISTFILESIZE=$(( $HISTSIZE * 25 ));
 # Omit duplicates and commands that begin with a space from history.
 export HISTCONTROL='ignoreboth';
 export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S"
