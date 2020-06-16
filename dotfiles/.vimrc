@@ -36,6 +36,12 @@ filetype plugin indent on    " required
 "Automatically deletes all trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
 
+" Optimize for fast terminal connections
+set ttyfast
+
+" Don’t add empty newlines at the end of files
+set binary
+set noeol
 
 " Avoid <Esc> key "
 inoremap qq <Esc>
@@ -155,13 +161,21 @@ set scrolloff=10
 " A buffer becomes hidden when it is abandoned "
 set hidden
 
+" Centralize backups, swapfiles and undo history
+
 " Sets central temp file location, to prevent local default behavior.
 if isdirectory($HOME . '/.vim/.tmp') == 0
   :silent !mkdir -m 700  -p ~/.vim/.tmp > /dev/null 2>&1
 endif
 
-set backupdir=~/.vim/.tmp ",~/.local/tmp/vim,/var/tmp,/tmp,
-set directory=~/.vim/.tmp ",~/.local/tmp/vim,/var/tmp,/tmp,
+if isdirectory( $HOME . '/.vim/backups') == 0
+  :silent !mkdir -m 700 -p ~/.vim/backups > /dev/null 2>&1
+endif
+if isdirectory( $HOME . '/.vim/swaps') == 0
+  :silent !mkdir -m 700 -p ~/.vim/swaps > /dev/null 2>&1
+endif
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
 
 if exists("+viminfo")
   " viminfo -- Saves Vim state information such as marks, command line
@@ -426,5 +440,3 @@ let g:vimtex_quickfix_latexlog = {
 autocmd BufNewFile *.html 0r ~/.vim/templates/skeleton.html
 let g:user_emmet_leader_key='<Tab>'
 autocmd FileType html inoremap qq <Esc>
-
-
