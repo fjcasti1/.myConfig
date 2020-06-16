@@ -16,4 +16,4 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # Link .vim directory
 ln -s ~/.myConfig/.vim/templates ~/.vim/templates
 # Install Plugins
-vim ~/.myConfig/installingVim.txt -c 'PluginInstall!' -c 'qa!'
+vim ~/.myConfig/vimInstallNotes.txt -c 'PluginInstall!' -c 'qa!'
