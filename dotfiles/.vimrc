@@ -333,6 +333,8 @@ map s :%s/
 " GIT - FUGITIVE"
 map <Leader>gs :G<CR>
 map <Leader>gc :Gcommit<CR>
+map <Leader>gps :Gpush<CR>
+map <Leader>gpl :Gpull<CR>
 map <Leader>gf :diffget //2<CR>
 map <Leader>gh :diffget //3<CR>
 
