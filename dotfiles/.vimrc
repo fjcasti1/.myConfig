@@ -14,7 +14,8 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 " My Plugins "
-Plugin 'powerline/powerline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'python-mode/python-mode'
 Plugin 'davidhalter/jedi-vim'
@@ -24,7 +25,6 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'fjcasti1/lichen'
 Plugin 'lervag/vimtex'
 "Plugin 'xuhdev/vim-latex-live-preview'
-Plugin 'jreybert/vimagit'
 Plugin 'mattn/emmet-vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -330,13 +330,11 @@ let NERDTreeShowHidden=1
 " Searching faster
 map s :%s/
 
-" GIT "
-map <Leader>m :Magit<CR>
-let g:magit_default_fold_level=0
-let g:magit_auto_close=1
-autocmd User VimagitEnterCommit startinsert
-autocmd User VimagitEnterCommit setlocal textwidth=72
-autocmd User VimagitLeaveCommit setlocal textwidth=0
+" GIT - FUGITIVE"
+map <Leader>gs :G<CR>
+map <Leader>gc :Gcommit<CR>
+map <Leader>gf :diffget //2<CR>
+map <Leader>gh :diffget //3<CR>
 
 ""LATEX
 
