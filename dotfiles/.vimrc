@@ -324,6 +324,7 @@ let g:jedi#popup_select_first = 1
 map <Leader>o :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=3
 let NERDTreeNaturalSort=1
+let NERDTreeShowHidden=1
 "let NERDTreeCustomOpenArgs={'file':{'where':'t'}, 'dir':{'where':'t'}}
 
 " Searching faster
@@ -454,4 +455,3 @@ let g:vimtex_quickfix_latexlog = {
 " HTML "
 autocmd BufNewFile *.html 0r ~/.vim/templates/skeleton.html
 let g:user_emmet_leader_key='<Tab>'
-autocmd FileType html inoremap qq <Esc>
