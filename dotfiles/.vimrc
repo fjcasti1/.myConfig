@@ -269,7 +269,7 @@ autocmd Syntax * call HighlightKeywords()
 set laststatus=2
 
 " Settings for ctrlP "
-map <Leader>o <C-p>
+map <Leader>f <C-p>
 let g:ctrlp_max_height = 20
 let g:ctrlp_working_path_mode = 'aw'
 let g:ctrlp_show_hidden = 1
@@ -321,7 +321,7 @@ let g:jedi#popup_select_first = 1
 " NERDTree "
 "map <Leader>a :NERDTree<CR>
 "map <Leader>' :NERDTreeClose<CR>
-map <Leader>f :NERDTreeToggle<CR>
+map <Leader>o :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=3
 let NERDTreeNaturalSort=1
 "let NERDTreeCustomOpenArgs={'file':{'where':'t'}, 'dir':{'where':'t'}}
