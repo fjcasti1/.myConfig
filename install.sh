@@ -23,9 +23,5 @@ rm -rf ~/.fzf
 rm ~/.fzf.bash
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 # Generate .fzf.bash for autocompletion and key-bindings
-# Avoids changes in shell files
-./.fzf/install << EOF
-y
-y
-n
-EOF
+# Answers yes to all questions
+echo y | ~/./.fzf/install
