@@ -66,10 +66,10 @@ let mapleader = " "
 "Backspace behaves normally"
 set backspace=indent,eol,start
 
-" Tabs "
-map <Leader>t :tabnew<CR>
-map <Leader>n :tabnext<CR>
-map <Leader>b :tabprevious<CR>
+" Tabs in different buffers vertically split"
+map <Leader>t :new<CR>:vert ba<CR>
+map <Leader>n :bnext<CR>
+map <Leader>b :bprev<CR>
 
 " Horizontal splits "
 map <Leader>h :split<CR>
@@ -81,9 +81,12 @@ map <Leader>v :vsplit<CR>
 map <Leader><Left> <c-w><Left><CR>
 map <Leader><Right> <c-w><Right><CR>
 
-" Save & Quit Quick "
-noremap <Leader>q :q<CR>
+
+" Quit Buffers "
+noremap <Leader>d :bd<CR>
+" Quick Save & Quit "
 noremap <Leader>w :w<CR>
+noremap <Leader>q :q<CR>
 inoremap ww <Esc>:w<CR>i
 
 " Map sort function to a key, removes duplicates "
@@ -455,3 +458,6 @@ let g:vimtex_quickfix_latexlog = {
 " HTML "
 autocmd BufNewFile *.html 0r ~/.vim/templates/skeleton.html
 let g:user_emmet_leader_key='<Tab>'
+
+
+let g:airline#extensions#tabline#enabled = 1
