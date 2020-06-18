@@ -8,5 +8,7 @@ for file in {bashrc,bash_profile,bash_prompt,aliases,functions,inputrc,vimrc,git
 done;
 unset file;
 
-# Remove .vim directory
+# Remove .vim and .fzf directories
 rm -rf ~/.vim
+rm -rf ~/.fzf
+rm ~/.fzf.bash
