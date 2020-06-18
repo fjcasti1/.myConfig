@@ -26,6 +26,7 @@ Plugin 'fjcasti1/lichen'
 Plugin 'lervag/vimtex'
 "Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'mattn/emmet-vim'
+Plugin 'mbbill/undotree'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -81,7 +82,8 @@ map <Leader>v :vsplit<CR>
 map <Leader><Left> <c-w><Left><CR>
 map <Leader><Right> <c-w><Right><CR>
 
-
+" Undo Tree "
+nnoremap <Leader>u :UndotreeShow<CR>
 " Quit Buffers "
 noremap <Leader>d :bd<CR>
 " Quick Save & Quit "
