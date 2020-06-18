@@ -331,7 +331,7 @@ let NERDTreeShowHidden=1
 map s :%s/
 
 " GIT - FUGITIVE"
-map <Leader>gs :G<CR>
+map <Leader>g :G<CR>
 map <Leader>gc :Gcommit<CR>
 map <Leader>gps :Gpush<CR>
 map <Leader>gpl :Gpull<CR>
