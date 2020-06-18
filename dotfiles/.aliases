@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"
+
+alias vim="vim -O"
 
 # Shortcuts
 alias dc="cd ~/Documents"
