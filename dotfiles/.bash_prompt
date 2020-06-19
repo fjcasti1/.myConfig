@@ -52,16 +52,16 @@ prompt_git() {
 		fi;
     # Check for behind commits
     behind=$(git rev-list --left-right --count origin/master...master | awk \
-    '{print ""$1""}')
+    '{print ""$1""}');
     if [ $behind -gt 0 ]; then
-      s+="][${behind}⇣"
-    fi
+      s+="][${behind}⇣;"
+    fi;
     # Check for ahead commits
     ahead=$(git rev-list --left-right --count origin/master...master | awk \
-    '{print ""$2""}')
+    '{print ""$2""}');
     if [ $ahead -gt 0 ]; then
-      s+="][${ahead}⇡"
-    fi
+      s+="][${ahead}⇡";
+    fi;
 	fi;
 
 	[ -n "${s}" ] && s=" [${s}]";
@@ -113,6 +113,7 @@ else
 	hostStyle="${yellow}";
 fi;
 
+envName=$(conda info --envs | grep '*' | awk '{print $1}');
 # Set the terminal title and prompt.
 PS1="\[\033]0;\W\007\]"; # working directory base name
 PS1+="\[${bold}\]\n"; # newline
@@ -123,7 +124,11 @@ PS1+="\[${white}\]:";
 PS1+="\[${green}\]\W/"; # working directory full path
 PS1+="\$(prompt_git \"\[${white}\] \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
 PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
+if [ $envName != 'base' ]; then
+  PS1+="\[${white}\]($envName)\$ \[${reset}\]"; # `$` (and reset color)
+fi;
 export PS1;
 
 PS2="\[${yellow}\]→ \[${reset}\]";
 export PS2;
+
