@@ -54,7 +54,7 @@ prompt_git() {
     behind=$(git rev-list --left-right --count origin/master...master | awk \
     '{print ""$1""}');
     if [ $behind -gt 0 ]; then
-      s+="][${behind}⇣;"
+      s+="][${behind}⇣";
     fi;
     # Check for ahead commits
     ahead=$(git rev-list --left-right --count origin/master...master | awk \
