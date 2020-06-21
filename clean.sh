@@ -11,4 +11,3 @@ unset file;
 # Remove .vim and .fzf directories
 rm -rf ~/.vim
 rm -rf ~/.fzf
-rm ~/.fzf.bash
