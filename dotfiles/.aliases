@@ -25,11 +25,11 @@ fi
 # Always use color output for `ls`
 alias ls="ls -F ${colorflag}"
 
-# List all files colorized in long format, excluding . and ..
+# List all files and directories colorized in long format, excluding . and ..
 alias ll="ls -lAFh ${colorflag}"
 
-# List only directories, use color output
-alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
+# List only files colorized in long format, excluding . and ..
+alias llf="ls -lAFh ${colorflag} | grep --color=never '^[^d]'"
 
 # List only directories colorized in long format, excluding . and ..
 alias lld="ls -lAFh ${colorflag} | grep --color=never '^d'"
