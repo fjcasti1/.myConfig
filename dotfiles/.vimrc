@@ -78,7 +78,7 @@ map <Leader><Up> <c-w><Up><CR>
 map <Leader><Down> <c-w><Down><CR>
 
 " Vertical splits "
-map <Leader>v :vsplit<CR>
+map <Leader>v :vsplit<CR><c-w><Right><CR>
 map <Leader><Left> <c-w><Left><CR>
 map <Leader><Right> <c-w><Right><CR>
 
