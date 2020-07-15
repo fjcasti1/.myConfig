@@ -6,6 +6,9 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"
 
+# Prompt a question before overwritting files
+alias mv="mv -i"
+
 alias vim="vim -O"
 
 # Shortcuts
