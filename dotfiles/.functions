@@ -1,5 +1,21 @@
 #!/usr/bin/env bash
 
+
+# Key Bindings
+bind '"\C-f":"cd_with_fzf\n"'
+bind '"\C-o":"open_with_fzf\n"'
+bind '"\C-v":"vim_with_fzf\n"'
+
+function open_with_fzf(){
+  fd -t f -H -I | fzf -m --preview="cat {}" | xargs -ro -d "\n" xdg-open 2>&-
+}
+function cd_with_fzf(){
+  cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 2 {}")" && echo "$PWD" && tree -L 1
+}
+function vim_with_fzf(){
+  fd -t f -H -I | fzf -m --preview="cat {}" | xargs -ro -d "\n" vim 2>&-
+}
+
 # Create a new directory and enter it
 function mkd() {
 	mkdir -p "$@" && cd "$_";
