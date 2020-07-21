@@ -62,3 +62,7 @@ fi
 # Key bindings
 # ------------
 source "$HOME/.fzf/shell/key-bindings.bash"
+
+
+# Python Path
+export PYTHONPATH=$PYTHONPATH:~/.local/lib/python3.x/site-packages/
