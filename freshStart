@@ -1,0 +1,69 @@
+## Remove Software from Software Apps
+Remove gnome-characters
+Remove Favorites
+
+## Install Apps
+Spotify
+Slack
+Zoom
+VLC
+mpv
+Texmaker
+
+## Edit Keyboard Short-Cuts (Settings)
+#### Open
+Open Home Folder: Ctrl+Alt+H
+Open Web Browser: Ctrl+Alt+G
+Open Settings   : Ctrl+Alt+S
+### Navigation
+Move Windowss   : Ctrl+Super+Direction
+### Windows
+Maximize        : Super+Direction
+### Font Size
+Increase : Ctrl+=
+Decrease : Ctrl+-
+
+## Edit other options
+Auto hide the Dock
+
+## Edit Terminal Preferences
+Disable Terminal Bell
+Colors: Choose Custom, Built-in theme White on Black, change highlight color
+and use some transparency
+
+## Install with Command Line
+#### Install vim
+sudo apt install vim
+#### Install git
+sudo apt install git
+#### Install awesome-Font
+sudo apt-get install fonts-powerline
+#### Install personal configuration to get going
+git clone https://fjcasti1@github.com/fjcasti1/.myConfig
+cd .myConfig/
+./install.sh
+It is still missing the font for the prompt and anaconda is not installed
+#### Install Google Chrome
+Donwload debian from website
+sudo apt install
+cd Downloads
+sudo apt install ./google-chrome-stable_current_amd64.deb
+Check Chrome works
+Make Chrome a Favorite
+Sign in into Chrome
+Remove FireFox from Software Apps
+
+#### Install anaconda
+Install anaconda (not leave anaconda output in .bashrc, it is in .extra)
+conda update conda
+conda update --all
+
+#### Install tmux
+sudo apt install tmux
+#### Install finder fd (depends on version might have to use dpkg)
+sudo apt install fd-find
+#### Install tree
+sudo apt install tree
+
+### Install cisco VPN
+### Set up ssh keys
