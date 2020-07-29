@@ -29,7 +29,9 @@ fi
 alias ls="ls -F ${colorflag}"
 
 # List all files and directories colorized in long format, excluding . and ..
-alias ll="ls -lAFh ${colorflag}"
+ls_style="--group-directories-first --time-style=+'%Y-%m-%d %H:%M'"
+alias ls="ls ${colorflag} ${ls_style}"
+alias ll="ls -lAFh ${colorflag} ${ls_style}"
 
 # List only files colorized in long format, excluding . and ..
 alias llf="ls -lAFh ${colorflag} | grep --color=never '^[^d]'"
