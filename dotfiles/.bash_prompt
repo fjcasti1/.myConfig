@@ -51,13 +51,13 @@ prompt_git() {
 			s+='$';
 		fi;
     # Check for behind commits
-    behind=$(git rev-list --left-right --count origin/master...master | awk \
+    behind=$(git rev-list --left-right --count origin/${branchName}...${branchName} | awk \
     '{print ""$1""}');
     if [ $behind -gt 0 ]; then
       s+="][${behind}⇣";
     fi;
     # Check for ahead commits
-    ahead=$(git rev-list --left-right --count origin/master...master | awk \
+    ahead=$(git rev-list --left-right --count origin/${branchName}...${branchName} | awk \
     '{print ""$2""}');
     if [ $ahead -gt 0 ]; then
       s+="][${ahead}⇡";
