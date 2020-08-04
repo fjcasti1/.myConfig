@@ -6,11 +6,19 @@ bind '"\C-f":"cd_with_fzf\n"'
 bind '"\C-o":"open_with_fzf\n"'
 bind '"\C-v":"vim_with_fzf\n"'
 
+# `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
+# the `.git` directory, listing directories first. The output gets piped into
+# `less` with options to preserve color and line numbers, unless the output is
+# small enough for one screen.
+function tre() {
+	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+}
+
 function open_with_fzf(){
   fd -t f -H -I | fzf -m --preview="cat {}" | xargs -ro -d "\n" xdg-open 2>&-
 }
 function cd_with_fzf(){
-  cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 2 {}")" && echo "$PWD" && tree -L 1
+  cd $HOME && cd "$(fd -t d | fzf --preview="tree -aCL 2 --dirsfirst {}")" && echo "$PWD" && tree -aCL 2 --dirsfirst
 }
 function vim_with_fzf(){
   fd -t f -H -I | fzf -m --preview="cat {}" | xargs -ro -d "\n" vim 2>&-
@@ -119,14 +127,6 @@ function o() {
 	else
 		open "$@";
 	fi;
-}
-
-# `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
-# the `.git` directory, listing directories first. The output gets piped into
-# `less` with options to preserve color and line numbers, unless the output is
-# small enough for one screen.
-function tre() {
-	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
 
 duh() {
