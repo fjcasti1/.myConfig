@@ -338,11 +338,11 @@ map s :%s/
 
 " GIT - FUGITIVE"
 map <Leader>g :G<CR>
-map <Leader>gc :Gcommit<CR>
-map <Leader>gps :Gpush<CR>
-map <Leader>gpl :Gpull<CR>
-map <Leader>gf :diffget //2<CR>
-map <Leader>gh :diffget //3<CR>
+map <Leader>c :Gcommit<CR>
+map <Leader>ps :Gpush<CR>
+map <Leader>pl :Gpull<CR>
+map <Leader>ll :diffget //2<CR>
+map <Leader>rr :diffget //3<CR>
 
 ""LATEX
 
