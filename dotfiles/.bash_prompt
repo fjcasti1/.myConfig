@@ -69,6 +69,15 @@ prompt_git() {
 	echo -e "${1}\uE0A0${branchName}${2}${s}";
 }
 
+prompt_conda() {
+	local s='';
+	local envName='';
+  envName=$(conda info --envs | grep '*' | awk '{print $1}');
+	# Check if the current environment is base.
+  [ $envName == 'base' ] && return
+  echo -e "${1}(${envName})\n";
+}
+
 if tput setaf 1 &> /dev/null; then
 	tput sgr0; # reset colors
 	bold=$(tput bold);
@@ -113,20 +122,18 @@ else
 	hostStyle="${yellow}";
 fi;
 
-envName=$(conda info --envs | grep '*' | awk '{print $1}');
 # Set the terminal title and prompt.
 PS1="\[\033]0;\W\007\]"; # working directory base name
 PS1+="\[${bold}\]\n"; # newline
+PS1+="\$(prompt_conda \"\[${cyan}\]\")"; # Conda environment details
+PS1+="\[${bold}\]"; # newline
 PS1+="\[${userStyle}\]\u"; # username
 PS1+="\[${white}\]@";
 PS1+="\[${hostStyle}\]\h"; # host
 PS1+="\[${white}\]:";
 PS1+="\[${green}\]\W/"; # working directory full path
 PS1+="\$(prompt_git \"\[${white}\] \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
-PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
-if [ $envName != 'base' ]; then
-  PS1+="\[${white}\]($envName)\$ \[${reset}\]"; # `$` (and reset color)
-fi;
+PS1+="\[${white}\]\$ \[${reset}\] "; # `$` (and reset color)
 export PS1;
 
 PS2="\[${yellow}\]→ \[${reset}\]";
