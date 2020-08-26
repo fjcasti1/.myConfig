@@ -137,7 +137,7 @@ set history=1000
 set undolevels=700
 
 " Real programmers don't use TABs but spaces "
-autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4
+"autocmd FileType python setlocal tabstop=2 softtabstop=2 shiftwidth=2
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
