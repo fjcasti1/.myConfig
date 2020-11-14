@@ -31,38 +31,40 @@ prompt_git() {
 	# Thanks, @paulirish!
 	# https://github.com/paulirish/dotfiles/blob/dd33151f/.bash_prompt#L110-L123
 	repoUrl="$(git config --get remote.origin.url)";
-	if grep -q 'chromium/src.git' <<< "${repoUrl}"; then
-		s+='*';
-	else
-		# Check for untracked files.
-		if [ -n "$(git ls-files --others --exclude-standard)" ]; then
-			s+='?';
-		fi;
-		# Check for unstaged changes.
-		if ! $(git diff-files --quiet --ignore-submodules --); then
-			s+='!';
-		fi;
-		# Check for uncommitted changes in the index.
-		if ! $(git diff --quiet --ignore-submodules --cached); then
-			s+='+';
-		fi;
-		# Check for stashed files.
-		if $(git rev-parse --verify refs/stash &>/dev/null); then
-			s+='$';
-		fi;
-    # Check for behind commits
-    behind=$(git rev-list --left-right --count origin/${branchName}...${branchName} | awk \
-    '{print ""$1""}');
-    if [ $behind -gt 0 ]; then
-      s+="][${behind}⇣";
-    fi;
-    # Check for ahead commits
-    ahead=$(git rev-list --left-right --count origin/${branchName}...${branchName} | awk \
-    '{print ""$2""}');
-    if [ $ahead -gt 0 ]; then
-      s+="][${ahead}⇡";
-    fi;
-	fi;
+  if [ ! -z $repoUrl ]; then
+	  if grep -q 'chromium/src.git' <<< "${repoUrl}"; then
+	  	s+='*';
+	  else
+	  	# Check for untracked files.
+	  	if [ -n "$(git ls-files --others --exclude-standard)" ]; then
+	  		s+='?';
+	  	fi;
+	  	# Check for unstaged changes.
+	  	if ! $(git diff-files --quiet --ignore-submodules --); then
+	  		s+='!';
+	  	fi;
+	  	# Check for uncommitted changes in the index.
+	  	if ! $(git diff --quiet --ignore-submodules --cached); then
+	  		s+='+';
+	  	fi;
+	  	# Check for stashed files.
+	  	if $(git rev-parse --verify refs/stash &>/dev/null); then
+	  		s+='$';
+	  	fi;
+      # Check for behind commits
+      behind=$(git rev-list --left-right --count origin/${branchName}...${branchName} 2>/dev/null | awk \
+      '{print ""$1""}');
+      if [ ${behind} -gt 0 ]; then
+        s+="][${behind}⇣";
+      fi;
+      # Check for ahead commits
+      ahead=$(git rev-list --left-right --count origin/${branchName}...${branchName} 2>/dev/null | awk \
+      '{print ""$2""}');
+      if [ $ahead -gt 0 ]; then
+        s+="][${ahead}⇡";
+      fi;
+	  fi;
+  fi;
 
 	[ -n "${s}" ] && s=" [${s}]";
 
@@ -138,4 +140,8 @@ export PS1;
 
 PS2="\[${yellow}\]→ \[${reset}\]";
 export PS2;
+
+
+# Set the terminal files and directories colors
+#LSCOLORS="di=1:31:*.desktop=4;36"
 
