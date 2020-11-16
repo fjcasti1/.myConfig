@@ -188,3 +188,9 @@ THE SOFTWARE." > LICENSE
   gh repo create $repoName --$privacyOpt -y
   git push -u origin main
 }
+
+git_create_branch_and_track(){
+  branchName=${1?"ERROR: branch name required"}
+  git checkout -b $branchName
+  git push -u origin $branchName
+}

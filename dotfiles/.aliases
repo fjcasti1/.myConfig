@@ -112,5 +112,7 @@ alias "gitckd"='git checkout develop'
 alias "gitb"='git branch -a'
 alias "gitbd"='git branch -d'
 alias "gitbc"='git checkout -b'
+alias "gitbt"='git push -u origin'
+alias "gitbct"='git_create_branch_and_track'
 alias "gitnew"='git_create'
 
