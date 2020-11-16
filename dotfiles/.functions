@@ -147,10 +147,15 @@ calc() {
 }
 
 git_create() {
+  repoName=$1
+  privacyOpt=${2:-public}
+  if [ $privacyOpt = '-p' -o $privacyOpt = '--private' ]; then
+    privacyOpt="private"
+  fi
 # Create & change into directory
-  mkd $1
+  mkd $repoName
 # Add Readme
-  echo "# $1" >> README.md
+  echo "# $repoName" >> README.md
 # Add MIT License
   year=$(date +"%Y")
   printf "The MIT License
@@ -179,7 +184,7 @@ THE SOFTWARE." > LICENSE
   git add -A
   git commit -m "First commit"
   git branch -M main
-  git remote add origin https://github.com/fjcasti1/$1.git
-  gh repo create $1 --public -y
+  git remote add origin https://github.com/fjcasti1/$repoName.git
+  gh repo create $repoName --$privacyOpt -y
   git push -u origin main
 }
