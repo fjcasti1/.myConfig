@@ -15,6 +15,7 @@ alias vim="vim -O"
 alias dc="cd ~/Documents"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
+alias tmp="cd /tmp/"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
