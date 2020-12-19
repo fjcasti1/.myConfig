@@ -187,6 +187,7 @@ THE SOFTWARE." > LICENSE
   git remote add origin https://github.com/fjcasti1/$repoName.git
   gh repo create $repoName --$privacyOpt -y
   git push -u origin main
+  gitbct dev
 }
 
 git_create_branch_and_track(){
